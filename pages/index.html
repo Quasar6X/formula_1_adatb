@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/form.css">
+    <meta charset="UTF-8">
+    <title>F1</title>
+    <style>
+        form {
+            text-align: center;
+            line-height: 2.0;
+        }
+
+        label {
+            font-size: 115%;
+        }
+
+        .form_page_submit_btn {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="form_title">Táblák</div>
+        <form method="post" action="query.php">
+            <label>
+                Csapat <input type="radio" name="table" value="csapat" checked><br>
+            </label>
+            <label>
+                Nagydíj <input type="radio" name="table" value="nagydij"><br>
+            </label>
+            <label>
+                Pálya <input type="radio" name="table" value="palya"><br>
+            </label>
+            <label>
+                Részt vesz <input type="radio" name="table" value="resztvesz"><br>
+            </label>
+            <label>
+                Sofőr <input type="radio" name="table" value="sofor"><br>
+            </label>
+            <label>
+                Sofőr Bajnokság <input type="radio" name="table" value="soforbajnoksag"><br>
+            </label>
+            <label>
+                Versenyez <input type="radio" name="table" value="versenyez"><br>
+            </label>
+            <div class="form_page_submit_btn"><button type="submit">Lekérdez</button></div>
+        </form>
+    </div>
+</body>
+</html>

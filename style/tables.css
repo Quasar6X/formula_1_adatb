@@ -1,0 +1,116 @@
+.table_parent_div {
+    display: grid;
+    margin: 70px 20% 30px;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-areas:
+        "table table table"
+        "refresh back add";
+}
+
+.table_parent_div form:first-of-type {
+    grid-area: refresh;
+    display: grid;
+}
+
+.table_parent_div form:last-of-type {
+    grid-area: add;
+    display: grid;
+}
+
+.table_parent_div div {
+    grid-area: back;
+    display: grid;
+}
+
+table {
+    grid-area: table;
+    border-collapse: collapse;
+    box-shadow: 10px 10px 20px 5px #707070;
+    margin-bottom: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+}
+
+th {
+    text-shadow: 2px 2px #A0A0A0;
+    font-weight: bold;
+    background-color: #FF1801;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: #fcb1b1;
+}
+
+tr:hover {
+    background-color: lightgray;
+}
+ /* START OF BOTTOM 3 BUTTONS */
+.icon_btn {
+    display: grid;
+    margin: auto;
+    text-align: center;
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+    height: 80px;
+    width: 80px;
+    border: none;
+    outline: none;
+}
+
+.icon_btn:hover {
+    transform: scale(1.25);
+}
+
+#refresh {
+    background: transparent url("../images/refresh.png") no-repeat;
+    background-size: 80px;
+}
+
+#back {
+    background: transparent url("../images/back.png") no-repeat;
+    background-size: 80px;
+}
+
+#add {
+    background: transparent url("../images/add.png") no-repeat;
+    background-size: 80px;
+}
+/* END OF BOTTOM 3 BUTTONS */
+
+.modify_btn {
+    margin: auto;
+    text-align: center;
+    transition: all .4s ease-in-out;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent url("../images/pencil.png") no-repeat;
+    background-size: 35px;
+}
+
+.modify_btn:hover {
+    transform: scale(1.25);
+}
+
+.delete_btn {
+    margin: auto;
+    text-align: center;
+    transition: all .4s ease-in-out;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent url("../images/bin.png") no-repeat;
+    background-size: 35px;
+}
+
+.delete_btn:hover {
+    transform: scale(1.25);
+}

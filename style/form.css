@@ -1,0 +1,74 @@
+input[type=text], input[type=date] {
+    width: 100%;
+    padding: 10px 16px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #FF1801;
+    outline: none;
+    transition: all .2s ease-in-out;
+}
+
+input[type=text]:focus, input[type=date]:focus {
+    border-bottom-width: 3px;
+    font-size: 135%;
+}
+
+select {
+    width: 100%;
+    padding: 10px 16px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #FF1801;
+    outline: none;
+    transition: border-bottom-width .2s ease-in-out;
+}
+
+select:focus {
+    border-bottom-width: 3px;
+}
+
+button {
+    box-shadow: 5px 5px 10px 2px #707070;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 120%;
+    background-color: #FF1801;
+    color: white;
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+    text-shadow: 1px 1px #A0A0A0;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.15);
+}
+
+form {
+    padding: 20px;
+}
+
+.form_page_submit_btn {
+    text-align: center;
+}
+
+.form_title {
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 140%;
+    line-height: 1.6;
+}
+
+.main {
+    margin: 10% 20% 0 20%;
+    box-shadow: 10px 10px 20px 5px #707070;
+    padding: 10px;
+}

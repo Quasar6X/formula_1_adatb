@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "F1Font";
+    src: url("https://www.formula1.com/etc/designs/fom-website/fonts/F1Regular/Formula1-Regular.ttf") format("truetype");
+}
+
+* {
+    font-family: F1Font, serif;
+    padding: 0;
+    margin: 0;
+}
