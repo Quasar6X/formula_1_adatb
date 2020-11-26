@@ -119,15 +119,9 @@ function error() : void
 function check_result(bool $result) : void
 {
     if ($result)
-        echo "<script>
-                alert('SIKERES beszúrás!');
-                window.location.replace('../pages/index.html');
-              </script>";
+        echo "<script>alert('SIKERES beszúrás!'); window.location.replace('../pages/index.html');</script>";
     else
-        echo "<script>
-                alert('SIKERTELEN beszúrás!');
-                window.location.replace('../pages/index.html');
-              </script>";
+        echo "<script>alert('SIKERTELEN beszúrás!'); window.location.replace('../pages/index.html');</script>";
 }
 
 if (isset($_POST["key"]))
