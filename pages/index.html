@@ -29,6 +29,7 @@
 
         .td_text {
             transition: all .4s ease-in-out;
+            width: 190px;
         }
 
         label {
@@ -43,23 +44,31 @@
         function onLoad()
         {
             let td = document.getElementsByClassName("td_text")[0];
+            let tr = document.getElementsByTagName("tr")[0];
             td.style.fontSize = "120%";
             td.style.fontWeight = "bold";
+            tr.style.borderBottomWidth = "3px";
         }
 
         function onClick(num)
         {
             let radio_btns = document.getElementsByClassName("radio_btn");
             let tds = document.getElementsByClassName("td_text");
+            let trs = document.getElementsByTagName("tr");
             radio_btns[num].click();
             tds[num].style.fontSize = "120%";
             tds[num].style.fontWeight = "bold";
             for (let i = 0; i < 6; ++i)
+            {
                 if (i !== num)
                 {
                     tds[i].style.fontSize = "100%";
                     tds[i].style.fontWeight = "normal";
+                    trs[i].style.borderBottomWidth = "2px";
+                } else {
+                    trs[i].style.borderBottomWidth = "3px";
                 }
+            }
         }
     </script>
 </head>
