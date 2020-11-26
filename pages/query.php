@@ -9,7 +9,7 @@
 <body>
     <div class="table_parent_div">
         <?php
-        include_once "../scripts/connection.php";
+        include_once "../scripts/connection.inc";
 
         function display_csapat(mysqli $conn) : void
         {

@@ -1,5 +1,5 @@
 <?php
-include_once "connection.php";
+include_once "connection.inc";
 
 function insert_record_csapat(mysqli $conn, string $nev, string $cimek, string $alapitva) : void
 {

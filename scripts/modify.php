@@ -1,5 +1,5 @@
 <?php
-include_once "connection.php";
+include_once "connection.inc";
 
 function update_record_csapat(mysqli $conn, string $table, string $key) : void
 {

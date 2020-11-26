@@ -1,5 +1,5 @@
 <?php
-include_once "connection.php";
+include_once "connection.inc";
 
 function delete_from_csapat(mysqli $conn, string $nev) : void
 {

@@ -9,7 +9,7 @@
 <body>
     <div class="main">
         <?php
-        include_once "../scripts/connection.php";
+        include_once "../scripts/connection.inc";
 
         function display_csapat_insert_form() : void
         {
