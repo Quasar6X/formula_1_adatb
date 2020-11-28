@@ -13,7 +13,7 @@ include "head.html";
 ?>
 <div class="table_title">
     <p>
-        Pályák a 2020-as szezonban
+        Futamok a 2020-as szezonban
     </p>
 </div>
 <div class="table_parent_div">

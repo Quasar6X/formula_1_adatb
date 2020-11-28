@@ -25,7 +25,7 @@
                         Konstruktőri címe(i): <input type='text' name='cimek' pattern='^[0-9]{1,3}$' spellcheck='false'>
                     </label>
                     <label>
-                        Alapítási éve: <input type='text' name='alapitva' required pattern='^[0-9]{4}$' spellcheck='false'>
+                        Alapítási éve: <input type='text' name='alapitva' pattern='^[0-9]{4}$' spellcheck='false'>
                     </label>
                     <div class='form_page_submit_btn'><button type='submit' name='key' value='csapat'>Beszúrás</button></div>
                 </form>";

@@ -12,9 +12,15 @@ function insert_record_csapat(mysqli $conn, string $nev, string $cimek, string $
         }
     mysqli_free_result($keys_res);
     if (empty($cimek))
-        $result = mysqli_query($conn, "INSERT INTO csapat (nev, alapitva) VALUES ('$nev', '$alapitva')");
+        if (empty($alapitva))
+            $result = mysqli_query($conn, "INSERT INTO csapat (nev, alapitva) VALUES ('$nev', NULL)");
+        else
+            $result = mysqli_query($conn, "INSERT INTO csapat (nev, alapitva) VALUES ('$nev', '$alapitva')");
     else
-        $result = mysqli_query($conn, "INSERT INTO csapat (nev, cimek, alapitva) VALUES ('$nev', '$cimek', '$alapitva')");
+        if (empty($alapitva))
+            $result = mysqli_query($conn, "INSERT INTO csapat (nev, cimek, alapitva) VALUES ('$nev', '$cimek', NULL)");
+        else
+            $result = mysqli_query($conn, "INSERT INTO csapat (nev, cimek, alapitva) VALUES ('$nev', '$cimek', '$alapitva')");
     check_result($result);
 }
 
