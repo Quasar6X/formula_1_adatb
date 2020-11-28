@@ -11,7 +11,10 @@ function insert_record_csapat(mysqli $conn, string $nev, string $cimek, string $
             error();
         }
     mysqli_free_result($keys_res);
-    $result = mysqli_query($conn, "INSERT INTO csapat (nev, cimek, alapitva) VALUES ('$nev', '$cimek', '$alapitva')");
+    if (empty($cimek))
+        $result = mysqli_query($conn, "INSERT INTO csapat (nev, alapitva) VALUES ('$nev', '$alapitva')");
+    else
+        $result = mysqli_query($conn, "INSERT INTO csapat (nev, cimek, alapitva) VALUES ('$nev', '$cimek', '$alapitva')");
     check_result($result);
 }
 
@@ -32,7 +35,7 @@ function insert_record_nagydij(mysqli $conn, string $datum, string $kork, string
     if (!in_array($palya_nev, $palyak))
     {
         mysqli_free_result($external_key_res);
-        echo "<script>alert('A megadott pálya nem létezik az adatbázisban!'); window.location.replace('../pages/index.html')</script>";
+        echo "<script>alert('A megadott pálya nem létezik az adatbázisban!'); window.location.replace('../pages/index.php')</script>";
     }
     mysqli_free_result($external_key_res);
     $result = mysqli_query($conn, "INSERT INTO nagydij (datum, korok, nev, `palya.nev`) VALUES ('$datum', '$kork', '$nev', '$palya_nev')");
@@ -63,7 +66,10 @@ function insert_record_resztvesz(mysqli $conn, string $sofor_id, string $soforba
             error();
         }
     mysqli_free_result($keys_res);
-    $result = mysqli_query($conn, "INSERT INTO resztvesz (`sofor.id`, `soforbajnoksag.ev`, ossz_pont, szam) VALUES ('$sofor_id', '$soforbajnoksag_ev', '$ossz_pont', '$szam')");
+    if (empty($ossz_pont))
+        $result = mysqli_query($conn, "INSERT INTO resztvesz (`sofor.id`, `soforbajnoksag.ev`, szam) VALUES ('$sofor_id', '$soforbajnoksag_ev', '$szam')");
+    else
+        $result = mysqli_query($conn, "INSERT INTO resztvesz (`sofor.id`, `soforbajnoksag.ev`, ossz_pont, szam) VALUES ('$sofor_id', '$soforbajnoksag_ev', '$ossz_pont', '$szam')");
     check_result($result);
 }
 
@@ -76,10 +82,13 @@ function insert_record_sofor(mysqli $conn, string $nev, string $cimek, string $c
     if (!in_array($csapat_nev, $csapatok))
     {
         mysqli_free_result($external_key_res);
-        echo "<script>alert('A megadott csapat nem létezik az adatbázisban!'); window.location.replace('../pages/index.html');</script>";
+        echo "<script>alert('A megadott csapat nem létezik az adatbázisban!'); window.location.replace('../pages/index.php');</script>";
     }
     mysqli_free_result($external_key_res);
-    $result = mysqli_query($conn, "INSERT INTO sofor (nev, cimek, `csapat.nev`) VALUES ('$nev', '$cimek', '$csapat_nev')");
+    if (empty($cimek))
+        $result = mysqli_query($conn, "INSERT INTO sofor (nev, `csapat.nev`) VALUES ('$nev', '$csapat_nev')");
+    else
+        $result = mysqli_query($conn, "INSERT INTO sofor (nev, cimek, `csapat.nev`) VALUES ('$nev', '$cimek', '$csapat_nev')");
     check_result($result);
 }
 
@@ -113,15 +122,15 @@ function insert_record_versenyez(mysqli $conn, string $nagydij_datum, string $so
 
 function error() : void
 {
-    echo "<script>alert('Kulcs ütközés!'); window.location.replace('../pages/index.html');</script>";
+    echo "<script>alert('Kulcs ütközés!'); window.location.replace('../pages/index.php');</script>";
 }
 
 function check_result(bool $result) : void
 {
     if ($result)
-        echo "<script>alert('SIKERES beszúrás!'); window.location.replace('../pages/index.html');</script>";
+        echo "<script>alert('SIKERES beszúrás!'); window.location.replace('../pages/index.php');</script>";
     else
-        echo "<script>alert('SIKERTELEN beszúrás!'); window.location.replace('../pages/index.html');</script>";
+        echo "<script>alert('SIKERTELEN beszúrás!'); window.location.replace('../pages/index.php');</script>";
 }
 
 if (isset($_POST["key"]))

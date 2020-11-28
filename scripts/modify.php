@@ -48,12 +48,12 @@ function check_result(bool $result) : void
     if ($result)
         echo "<script>
                 alert('SIKERES módosítás!');
-                window.location.replace('../pages/index.html');
+                window.location.replace('../pages/index.php');
               </script>";
     else
         echo "<script>
                 alert('SIKERTELEN módosítás!');
-                window.location.replace('../pages/index.html');
+                window.location.replace('../pages/index.php');
               </script>";
 }
 

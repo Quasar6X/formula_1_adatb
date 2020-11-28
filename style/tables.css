@@ -1,6 +1,20 @@
+.table_title {
+    text-align: center;
+    padding-top: 40px;
+    font-weight: bold;
+    font-size: 140%;
+    line-height: 1.6;
+    display: block;
+}
+
+.table_title p {
+    display: inline-block;
+    border-bottom: 2px solid #FF1801;
+}
+
 .table_parent_div {
     display: grid;
-    margin: 70px 20% 30px;
+    margin: 40px 20% 30px;
     grid-template-columns: 33.33% 33.33% 33.33%;
     grid-template-areas:
         "table table table"

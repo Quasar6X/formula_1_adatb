@@ -1,0 +1,41 @@
+nav {
+    position: sticky;
+    top: 0;
+    background-color: #FF1801;
+    box-shadow: 0 5px 30px 0 #707070;
+    display: flex;
+    align-items: center;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 130%;
+}
+
+nav ul li a {
+    display: block;
+    padding: 20px 30px;
+    text-decoration: none;
+    color: white;
+    border-bottom: 0 solid white;
+    transition: border-bottom-width .2s ease-in-out;
+}
+
+nav ul li a:hover {
+    border-bottom-width: 3px;
+}
+
+#flags {
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 15px;
+    transition: all .4s ease-in-out;
+}
+
+#flags:hover {
+    transform: scale(1.2);
+}

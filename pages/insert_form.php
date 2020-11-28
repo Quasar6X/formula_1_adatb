@@ -3,10 +3,14 @@
 <head>
     <link rel="stylesheet" href="../style/global.css">
     <link rel="stylesheet" href="../style/form.css">
+    <link rel="stylesheet" href="../style/head.css">
     <meta charset="UTF-8">
     <title>F1 Beszúrás</title>
 </head>
 <body>
+    <?php
+    include "head.html";
+    ?>
     <div class="main">
         <?php
         include_once "../scripts/connection.inc";
@@ -18,7 +22,7 @@
                         Neve: <input type='text' name='nev' required pattern='^(\w)(.|\s){1,150}$' spellcheck='false'>
                     </label>
                     <label>
-                        Konstruktőri címe(i): <input type='text' name='cimek' required pattern='^[0-9]{1,3}$' spellcheck='false'>
+                        Konstruktőri címe(i): <input type='text' name='cimek' pattern='^[0-9]{1,3}$' spellcheck='false'>
                     </label>
                     <label>
                         Alapítási éve: <input type='text' name='alapitva' required pattern='^[0-9]{4}$' spellcheck='false'>
@@ -96,7 +100,7 @@
                             echo "<option value='$item'>$item</option>";
             echo   "</select>
                     <label>
-                       Sofőr pontjai: <input type='text' name='ossz_pont' required pattern='^[0-9]{1,3}$' spellcheck='false'>
+                       Sofőr pontjai: <input type='text' name='ossz_pont' pattern='^[0-9]{1,3}$' spellcheck='false'>
                     </label>
                     <label>
                        Sofőr rajtszáma: <input type='text' name='szam' required pattern='^[0-9]{2}$' spellcheck='false'>
@@ -117,7 +121,7 @@
                         Neve: <input type='text' name='nev' required pattern='^(\w)(.|\s){1,150}$' spellcheck='false'>
                     </label>
                     <label>
-                        Cimek: <input type='text' name='cimek' required pattern='^[0-9]{1,2}$' spellcheck='false'>
+                        Cimek: <input type='text' name='cimek' pattern='^[0-9]{1,2}$' spellcheck='false'>
                     </label>
                     Csapat: <select name='csapat_nev' required>";
             foreach ($csapatok as $item)

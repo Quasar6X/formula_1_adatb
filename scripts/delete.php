@@ -40,9 +40,9 @@ function delete_from_soforbajnoksag(mysqli $conn, string $ev) : void
 function check_result(bool $result) : void
 {
     if ($result)
-        echo "<script>alert('SIKERES törlés!'); window.location.replace('../pages/index.html');</script>";
+        echo "<script>alert('SIKERES törlés!'); window.location.replace('../pages/index.php');</script>";
     else
-        echo "<script>alert('SIKERTELEN törlés!');window.location.replace('../pages/index.html');</script>";
+        echo "<script>alert('SIKERTELEN törlés!');window.location.replace('../pages/index.php');</script>";
 }
 
 function delete_from_versenyez(mysqli $conn, string $nagydij_datum, string $sofor_id) : void

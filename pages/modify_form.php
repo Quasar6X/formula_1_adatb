@@ -3,10 +3,14 @@
 <head>
     <link rel="stylesheet" href="../style/form.css">
     <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/head.css">
     <meta charset="UTF-8">
     <title>F1 Módosítás</title>
 </head>
 <body>
+    <?php
+    include "head.html";
+    ?>
     <div class="main">
         <?php
         include_once "../scripts/connection.inc";
