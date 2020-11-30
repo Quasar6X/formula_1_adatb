@@ -13,7 +13,7 @@ include "head.html";
 ?>
 <div class="table_title">
     <p>
-        Leghosszab futam 2020
+        Leghosszab futam
     </p>
 </div>
 <div class="table_parent_div">
