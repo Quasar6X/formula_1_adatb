@@ -33,11 +33,11 @@
 
         function display_nagydij_form(array $arr, mysqli $conn) : void
         {
-            $result = mysqli_query($conn, "SELECT nev FROM palya");
+            $result = $conn->query("SELECT nev FROM palya");
             $circuits = [];
-            while (($row = mysqli_fetch_assoc($result)) != null)
+            while (($row = $result->fetch_assoc()) != null)
                 $circuits[] = $row["nev"];
-            mysqli_free_result($result);
+            $result->free();
             echo "<div class='form_title'>Nagydíj</div><form action='../scripts/modify.php' method='post' onsubmit='return confirm(`Biztos módosítani kívánja az értékeket?`)'>
                 <label>
                     Dátuma: <input type='date' name='datum' required value='$arr[1]'>
@@ -63,11 +63,11 @@
 
         function display_palya_form(array $arr, mysqli $conn) : void
         {
-            $result = mysqli_query($conn, "SELECT orszag FROM palya GROUP BY orszag");
+            $result = $conn->query("SELECT orszag FROM palya GROUP BY orszag");
             $countries = [];
-            while (($row = mysqli_fetch_assoc($result)) != null)
+            while (($row = $result->fetch_assoc()) != null)
                 $countries[] = $row["orszag"];
-            mysqli_free_result($result);
+            $result->free();
             echo "<div class='form_title'>$arr[1]</div><form action='../scripts/modify.php' method='post' onsubmit='return confirm(`Biztos módosítani kívánja az értékeket?`)'>
             <label>
                 Pálya hossz (km): <input type='text' name='hossz' required pattern='^[0-9]{1,2}(\.[0-9]{1,3})?$' value='$arr[2]' spellcheck='false'>
@@ -103,11 +103,11 @@
 
         function display_sofor_form(array $arr, mysqli $conn) : void
         {
-            $result = mysqli_query($conn, "SELECT nev FROM csapat");
+            $result = $conn->query("SELECT nev FROM csapat");
             $csapatok = [];
-            while (($row = mysqli_fetch_assoc($result)) != null)
+            while (($row = $result->fetch_assoc()) != null)
                 $csapatok[] = $row["nev"];
-            mysqli_free_result($result);
+            $result->free();
             echo "<div class='form_title'>Sofőrazonosító: $arr[1]</div><form action='../scripts/modify.php' method='post' onsubmit='return confirm(`Biztos módosítani kívánja az értékeket?`)'>
             <label>
                 Név: <input type='text' name='nev' required pattern='^(\w)(.|\s){1,150}$' value='$arr[2]' spellcheck='false'>
@@ -170,23 +170,18 @@
         {
             $arr = explode(",", $_POST["key"]);
             $conn = connect_to_sql();
-            if (!mysqli_select_db($conn, "csapat_sport"))
+            match ($arr[0])
             {
-                close($conn);
-                die("Database cannot be reached");
-            }
-            switch ($arr[0])
-            {
-                case "csapat": display_csapat_form($arr); break;
-                case "nagydij": display_nagydij_form($arr, $conn); break;
-                case "palya": display_palya_form($arr, $conn); break;
-                case "resztvesz": display_reszt_vesz_form($arr); break;
-                case "sofor": display_sofor_form($arr, $conn); break;
-                case "soforbajnoksag": display_soforbajnoksag_form($arr); break;
-                case "versenyez": display_versenyez_form($arr); break;
-                default: die("Incorrect modify button");
-            }
-            close($conn);
+                "csapat" => display_csapat_form($arr),
+                "nagydij" => display_nagydij_form($arr, $conn),
+                "palya" => display_palya_form($arr, $conn),
+                "resztvesz" => display_reszt_vesz_form($arr),
+                "sofor" => display_sofor_form($arr, $conn),
+                "soforbajnoksag" => display_soforbajnoksag_form($arr),
+                "versenyez" => display_versenyez_form($arr),
+                default => die("Incorrect modify button"),
+            };
+            $conn->close();
         }
         ?>
     </div>

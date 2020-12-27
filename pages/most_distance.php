@@ -22,16 +22,11 @@ include "head.html";
         <?php
         include_once "../scripts/connection.inc";
         $conn = connect_to_sql();
-        if (!mysqli_select_db($conn, "csapat_sport"))
-        {
-            close($conn);
-            die("Database cannot be reached");
-        }
-        $result = mysqli_query($conn, "SELECT datum_final, nev_final, palyanev_final, FORMAT(max_len, 3) FROM (SELECT first.datum as datum_final, first.nev as nev_final, first.palyanev as palyanev_final, MAX(len) as max_len FROM (SELECT nagydij.nev, datum, nagydij.korok * palya.hossz as len, palya.nev as palyanev FROM nagydij, palya, soforbajnoksag WHERE EXTRACT(YEAR FROM datum) = ev AND `palya.nev` = palya.nev GROUP BY len) as first) as second");
-        while (($row = $result->fetch_row()) != null)
-            echo "<tr><td>". $row[0] ."</td><td>". $row[1] ."</td><td>". $row[2] ."</td><td>". $row[3] ."</td></tr>";
-        mysqli_free_result($result);
-        close($conn);
+        $result = $conn->query("SELECT datum_final, nev_final, palyanev_final, FORMAT(max_len, 3) FROM (SELECT first.datum as datum_final, first.nev as nev_final, first.palyanev as palyanev_final, MAX(len) as max_len FROM (SELECT nagydij.nev, datum, nagydij.korok * palya.hossz as len, palya.nev as palyanev FROM nagydij, palya, soforbajnoksag WHERE EXTRACT(YEAR FROM datum) = ev AND `palya.nev` = palya.nev GROUP BY len) as first) as second");
+        $arr = $result->fetch_row();
+        echo "<tr><td>". $arr[0] ."</td><td>". $arr[1] ."</td><td>". $arr[2] ."</td><td>". $arr[3] ."</td></tr>";
+        $result->free();
+        $conn->close();
         ?>
     </table>
 </div>

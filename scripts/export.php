@@ -4,11 +4,6 @@ include_once "connection.inc";
 $run = function ()
 {
     $conn = connect_to_sql();
-    if (!mysqli_select_db($conn, "csapat_sport"))
-    {
-        close($conn);
-        die("Database cannot be reached");
-    }
     $filenames = ["csapat.csv" => ["nev", "cimek", "alapitva"],
                 "nagydij.csv" => ["datum", "korok", "nev", "palya.nev"],
                 "palya.csv" => ["nev", "hossz", "kanyarok", "orszag"],
@@ -23,24 +18,24 @@ $run = function ()
         foreach ($filenames as $filename => $attributes)
         {
             $temp = explode(".", $filename);
-            $result = mysqli_query($conn, "SELECT * FROM $temp[0]");
+            $result = $conn->query("SELECT * FROM $temp[0]");
             if ($result->num_rows > 0)
             {
                 $f = fopen($filename, "w");
                 fprintf($f, chr(0xEF).chr(0xBB).chr(0xBF));
                 fputcsv($f, $attributes);
-                while (($row = mysqli_fetch_assoc($result)) != null)
+                while (($row = $result->fetch_assoc()) != null)
                 {
-                    switch ($temp[0])
+                    match ($temp[0])
                     {
-                        case "csapat": fputcsv($f, array($row["nev"], $row["cimek"], $row["alapitva"])); break;
-                        case "nagydij": fputcsv($f, array($row["datum"], $row["korok"], $row["nev"], $row["palya.nev"])); break;
-                        case "palya": fputcsv($f, array($row["nev"], $row["hossz"], $row["kanyarok"], $row["orszag"])); break;
-                        case "resztvesz": fputcsv($f, array($row["sofor.id"], $row["soforbajnoksag.ev"], $row["ossz_pont"], $row["szam"])); break;
-                        case "sofor": fputcsv($f, array($row["id"], $row["nev"], $row["cimek"], $row["csapat.nev"])); break;
-                        case "soforbajnoksag": fputcsv($f, array($row["ev"], $row["nev"])); break;
-                        case "versenyez": fputcsv($f, array($row["nagydij.datum"], $row["sofor.id"], $row["helyezes"], $row["szerzett_pontok"], $row["start_pozicio"])); break;
-                    }
+                        "csapat" => fputcsv($f, array($row["nev"], $row["cimek"], $row["alapitva"])),
+                        "nagydij" => fputcsv($f, array($row["datum"], $row["korok"], $row["nev"], $row["palya.nev"])),
+                        "palya" => fputcsv($f, array($row["nev"], $row["hossz"], $row["kanyarok"], $row["orszag"])),
+                        "resztvesz" => fputcsv($f, array($row["sofor.id"], $row["soforbajnoksag.ev"], $row["ossz_pont"], $row["szam"])),
+                        "sofor" => fputcsv($f, array($row["id"], $row["nev"], $row["cimek"], $row["csapat.nev"])),
+                        "soforbajnoksag" => fputcsv($f, array($row["ev"], $row["nev"])),
+                        "versenyez" => fputcsv($f, array($row["nagydij.datum"], $row["sofor.id"], $row["helyezes"], $row["szerzett_pontok"], $row["start_pozicio"])),
+                    };
                 }
                 fclose($f);
             }
@@ -48,7 +43,7 @@ $run = function ()
         }
     }
     $zip->close();
-    close($conn);
+    $conn->close();
     header("Content-disposition: attachment; filename=$zip_name");
     header("Content-type: application/zip");
     header("Content-length: ". filesize($zip_name));

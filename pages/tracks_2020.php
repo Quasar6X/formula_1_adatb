@@ -22,16 +22,11 @@ include "head.html";
         <?php
         include_once "../scripts/connection.inc";
         $conn = connect_to_sql();
-        if (!mysqli_select_db($conn, "csapat_sport"))
-        {
-            close($conn);
-            die("Database cannot be reached");
-        }
-        $result = mysqli_query($conn, "SELECT datum, nagydij.nev, palya.nev FROM palya, nagydij, soforbajnoksag WHERE EXTRACT(YEAR FROM datum) = ev AND `palya.nev` = palya.nev GROUP BY palya.nev, datum ORDER BY datum");
+        $result = $conn->query("SELECT datum, nagydij.nev, palya.nev FROM palya, nagydij, soforbajnoksag WHERE EXTRACT(YEAR FROM datum) = ev AND `palya.nev` = palya.nev GROUP BY palya.nev, datum ORDER BY datum");
         while (($row = $result->fetch_row()) != null)
             echo "<tr><td>". $row[0] ."</td><td>". $row[1] ."</td><td>". $row[2] ."</td></tr>";
-        mysqli_free_result($result);
-        close($conn);
+        $result->free();
+        $conn->close();
         ?>
     </table>
 </div>

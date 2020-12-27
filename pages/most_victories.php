@@ -22,16 +22,11 @@
             <?php
             include_once "../scripts/connection.inc";
             $conn = connect_to_sql();
-            if (!mysqli_select_db($conn, "csapat_sport"))
-            {
-                close($conn);
-                die("Database cannot be reached");
-            }
-            $result = mysqli_query($conn, "SELECT first.nev ,MAX(victories) FROM (SELECT sofor.nev, COUNT(helyezes) victories FROM versenyez, sofor, resztvesz, soforbajnoksag WHERE ev = `soforbajnoksag.ev` AND helyezes = 1 AND id = versenyez.`sofor.id` AND id = resztvesz.`sofor.id` GROUP BY versenyez.`sofor.id`, ev) as first;");
+            $result = $conn->query("SELECT first.nev ,MAX(victories) FROM (SELECT sofor.nev, COUNT(helyezes) victories FROM versenyez, sofor, resztvesz, soforbajnoksag WHERE ev = `soforbajnoksag.ev` AND helyezes = 1 AND id = versenyez.`sofor.id` AND id = resztvesz.`sofor.id` GROUP BY versenyez.`sofor.id`, ev) as first;");
             $arr = $result->fetch_row();
             echo "<tr><td>". $arr[0] ."</td><td>". $arr[1] ." Győzelem</td></tr>";
-            mysqli_free_result($result);
-            close($conn);
+            $result->free();
+            $conn->close();
             ?>
         </table>
     </div>

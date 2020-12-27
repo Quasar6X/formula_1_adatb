@@ -33,11 +33,11 @@
 
         function display_nagydij_insert_form(mysqli $conn) : void
         {
-            $result = mysqli_query($conn, "SELECT nev FROM palya");
+            $result = $conn->query("SELECT nev FROM palya");
             $palyak = [];
-            while (($row = mysqli_fetch_assoc($result)))
+            while (($row = $result->fetch_assoc()) != null)
                 $palyak[] = $row["nev"];
-            mysqli_free_result($result);
+            $result->free();
             echo "<div class='form_title'>Nagydíj</div><form action='../scripts/insert.php' method='post'>
                     <label>
                         Dátum: <input type='date' name='datum' required>
@@ -77,16 +77,16 @@
 
         function display_resztvesz_insert_form(mysqli $conn) : void
         {
-            $result = mysqli_query($conn, "SELECT ev FROM soforbajnoksag");
-            $result2 = mysqli_query($conn, "SELECT nev, id FROM sofor");
+            $result = $conn->query("SELECT ev FROM soforbajnoksag");
+            $result2 = $conn->query("SELECT nev, id FROM sofor");
             $evek = [];
             $soforok = [];
-            while (($row = mysqli_fetch_assoc($result)))
+            while (($row = $result->fetch_assoc()) != null)
                 $evek[] = $row["ev"];
-            mysqli_free_result($result);
-            while (($row = mysqli_fetch_assoc($result2)))
+            $result->free();
+            while (($row = $result2->fetch_assoc()) != null)
                 $soforok[] = $row["nev"]. "," .$row["id"];
-            mysqli_free_result($result2);
+            $result2->free();
             echo "<div class='form_title'>Részt vesz</div><form action='../scripts/insert.php' method='post'>
                     Sofőr: <select name='sofor_id' required>";
                         foreach ($soforok as $item)
@@ -111,11 +111,11 @@
 
         function display_sofor_insert_form(mysqli $conn) : void
         {
-            $result = mysqli_query($conn, "SELECT nev FROM csapat");
+            $result = $conn->query("SELECT nev FROM csapat");
             $csapatok = [];
-            while (($row = mysqli_fetch_assoc($result)) != null)
+            while (($row = $result->fetch_assoc()) != null)
                 $csapatok[] = $row["nev"];
-            mysqli_free_result($result);
+            $result->free();
             echo "<div class='form_title'>Sofőr</div><form action='../scripts/insert.php' method='post'>                  
                     <label>
                         Neve: <input type='text' name='nev' required pattern='^(\w)(.|\s){1,150}$' spellcheck='false'>
@@ -146,16 +146,16 @@
 
         function display_versenyez_insert_form(mysqli $conn) : void
         {
-            $result = mysqli_query($conn, "SELECT datum FROM nagydij ORDER BY datum DESC");
-            $result2 = mysqli_query($conn, "SELECT nev, id FROM sofor");
+            $result = $conn->query("SELECT datum FROM nagydij ORDER BY datum DESC");
+            $result2 = $conn->query("SELECT nev, id FROM sofor");
             $datumok = [];
             $soforok = [];
-            while (($row = mysqli_fetch_assoc($result)))
+            while (($row = $result->fetch_assoc()) != null)
                 $datumok[] = $row["datum"];
-            mysqli_free_result($result);
-            while (($row = mysqli_fetch_assoc($result2)))
+            $result->free();
+            while (($row = $result2->fetch_assoc()) != null)
                 $soforok[] = $row["nev"]. "," .$row["id"];
-            mysqli_free_result($result2);
+            $result2->free();
             echo "<div class='form_title'>Versenyez</div><form action='../scripts/insert.php' method='post'>
                     Nagydíj dátuma: <select name='nagydij_datum' required>";
                         foreach ($datumok as $item)
@@ -184,23 +184,18 @@
         if (isset($_POST["add"]))
         {
             $conn = connect_to_sql();
-            if (!mysqli_select_db($conn, "csapat_sport"))
+            match ($_POST["add"])
             {
-                close($conn);
-                die("Database cannot be reached");
-            }
-            switch ($_POST["add"])
-            {
-                case "csapat": display_csapat_insert_form(); break;
-                case "nagydij": display_nagydij_insert_form($conn); break;
-                case "palya": display_palya_insert_form(); break;
-                case "resztvesz": display_resztvesz_insert_form($conn); break;
-                case "sofor": display_sofor_insert_form($conn); break;
-                case "soforbajnoksag": display_soforbajnoksag_insert_form(); break;
-                case "versenyez": display_versenyez_insert_form($conn); break;
-                default: die("Incorrect add button");
-            }
-            close($conn);
+                "csapat" => display_csapat_insert_form(),
+                "nagydij" => display_nagydij_insert_form($conn),
+                "palya" => display_palya_insert_form(),
+                "resztvesz" => display_resztvesz_insert_form($conn),
+                "sofor" => display_sofor_insert_form($conn),
+                "soforbajnoksag" => display_soforbajnoksag_insert_form(),
+                "versenyez" => display_versenyez_insert_form($conn),
+                default => die("Incorrect add button"),
+            };
+            $conn->close();
         }
         ?>
     </div>

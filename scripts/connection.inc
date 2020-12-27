@@ -1,14 +1,14 @@
 <?php
     function connect_to_sql() : mysqli
     {
-        $conn = mysqli_connect("localhost", "root", "") or die("Wrong sql login data!");
-        mysqli_query($conn, "SET NAMES UTF-8");
-        mysqli_query($conn, "SET character_set_results=utf8");
-        mysqli_set_charset($conn, "utf8");
+        $conn = new mysqli("localhost", "root", "") or die("Wrong sql login data!");
+        $conn->query("SET NAMES UTF-8");
+        $conn->query("SET character_set_resutls=utf8");
+        $conn->set_charset("utf8");
+        if (!$conn->select_db("csapat_sport"))
+        {
+            $conn->close();
+            die("Database cannot be reached");
+        }
         return $conn;
-    }
-
-    function close(mysqli $connection) : void
-    {
-        mysqli_close($connection);
     }

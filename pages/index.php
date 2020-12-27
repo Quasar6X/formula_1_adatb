@@ -69,9 +69,8 @@
                     tds[i].style.fontSize = "100%";
                     tds[i].style.fontWeight = "normal";
                     trs[i].style.borderBottomWidth = "2px";
-                } else {
-                    trs[i].style.borderBottomWidth = "3px";
                 }
+                else trs[i].style.borderBottomWidth = "3px";
             }
         }
     </script>
