@@ -1,6 +1,6 @@
 # 🏁 Formula 1 Database University Project 🏁
 
-##**❗DISCLAIMER❗**
+## **❗DISCLAIMER❗**
 I do not own any copyright or intellectual property connected with Formula 1.
 This project is _**PURELY**_ for learning purposes. I am _**NOT**_ monetizing
 this project or the resulting product in any shape or form.
