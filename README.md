@@ -20,6 +20,8 @@ The program contains the following features:
 >* Three special querries at the top of the page ✔
 >* Exporting the tables as .CSV files ✔
 
+Also this project uses PHP 8 so you will need that if you want to try it out 😉
+
 ### You are absolutely free to use this project however you want, _**BUT**_ if you do please give me credit
 
 P.S: I'm not really good with CSS so please don't hurt me 😟
