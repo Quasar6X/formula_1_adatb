@@ -13,7 +13,7 @@ $run = function ()
                 "versenyez.csv" => ["nagydij.datum", "sofor.id", "helyezes", "szerzett_pontok", "start_pozicio"]];
     $zip = new ZipArchive();
     $zip_name = "exports.zip";
-    if ($zip->open($zip_name, ZipArchive::OVERWRITE))
+    if ($zip->open($zip_name, ZipArchive::CREATE))
     {
         foreach ($filenames as $filename => $attributes)
         {
@@ -22,7 +22,6 @@ $run = function ()
             if ($result->num_rows > 0)
             {
                 $f = fopen($filename, "w");
-                fprintf($f, chr(0xEF).chr(0xBB).chr(0xBF));
                 fputcsv($f, $attributes);
                 while (($row = $result->fetch_assoc()) != null)
                 {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <link rel="stylesheet" href="../style/global.css">
     <link rel="stylesheet" href="../style/form.css">
     <link rel="stylesheet" href="../style/head.css">
