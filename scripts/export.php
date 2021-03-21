@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\Pure;
+
 include_once "connection.inc";
 
 $run = function ()
@@ -27,13 +30,13 @@ $run = function ()
                 {
                     match ($temp[0])
                     {
-                        "csapat" => fputcsv($f, array($row["nev"], $row["cimek"], $row["alapitva"])),
-                        "nagydij" => fputcsv($f, array($row["datum"], $row["korok"], $row["nev"], $row["palya.nev"])),
-                        "palya" => fputcsv($f, array($row["nev"], $row["hossz"], $row["kanyarok"], $row["orszag"])),
-                        "resztvesz" => fputcsv($f, array($row["sofor.id"], $row["soforbajnoksag.ev"], $row["ossz_pont"], $row["szam"])),
-                        "sofor" => fputcsv($f, array($row["id"], $row["nev"], $row["cimek"], $row["csapat.nev"])),
-                        "soforbajnoksag" => fputcsv($f, array($row["ev"], $row["nev"])),
-                        "versenyez" => fputcsv($f, array($row["nagydij.datum"], $row["sofor.id"], $row["helyezes"], $row["szerzett_pontok"], $row["start_pozicio"])),
+                        "csapat" => fputcsv($f, array(convert($row["nev"]), convert($row["cimek"]), convert($row["alapitva"]))),
+                        "nagydij" => fputcsv($f, array(convert($row["datum"]), convert($row["korok"]), convert($row["nev"]), convert($row["palya.nev"]))),
+                        "palya" => fputcsv($f, array(convert($row["nev"]), convert($row["hossz"]), convert($row["kanyarok"]), convert($row["orszag"]))),
+                        "resztvesz" => fputcsv($f, array(convert($row["sofor.id"]), convert($row["soforbajnoksag.ev"]), convert($row["ossz_pont"]), convert($row["szam"]))),
+                        "sofor" => fputcsv($f, array(convert($row["id"]), convert($row["nev"]), convert($row["cimek"]), convert($row["csapat.nev"]))),
+                        "soforbajnoksag" => fputcsv($f, array(convert($row["ev"]), convert($row["nev"]))),
+                        "versenyez" => fputcsv($f, array(convert($row["nagydij.datum"]), convert($row["sofor.id"]), convert($row["helyezes"]), convert($row["szerzett_pontok"]), convert($row["start_pozicio"]))),
                     };
                 }
                 fclose($f);
@@ -51,4 +54,10 @@ $run = function ()
         unlink($filename);
     unlink($zip_name);
 };
+
+#[Pure] function convert($string) : string
+{
+    return mb_convert_encoding($string, "UTF-8");
+}
+
 $run();
