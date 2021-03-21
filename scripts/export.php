@@ -13,7 +13,7 @@ $run = function ()
                 "versenyez.csv" => ["nagydij.datum", "sofor.id", "helyezes", "szerzett_pontok", "start_pozicio"]];
     $zip = new ZipArchive();
     $zip_name = "exports.zip";
-    if ($zip->open($zip_name, ZipArchive::CREATE))
+    if ($zip->open($zip_name, ZipArchive::OVERWRITE))
     {
         foreach ($filenames as $filename => $attributes)
         {
